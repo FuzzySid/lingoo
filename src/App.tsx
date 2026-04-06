@@ -1,8 +1,11 @@
+import Layout from './components/Layout'
+import DictionaryView from './pages/DictionaryView'
+
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <h1 className="text-2xl font-bold p-4">Lingoo</h1>
-    </div>
+    <Layout>
+      <DictionaryView />
+    </Layout>
   )
 }
 
