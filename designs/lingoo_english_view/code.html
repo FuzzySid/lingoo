@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lingoo - Editorial Linguistic Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#351000",
+                    "tertiary-fixed": "#ffdbcc",
+                    "on-secondary-fixed-variant": "#413f82",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#a44100",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-dim": "#d9dadb",
+                    "surface-bright": "#f8f9fa",
+                    "on-secondary-fixed": "#140f54",
+                    "secondary-fixed": "#e2dfff",
+                    "primary-fixed": "#e2dfff",
+                    "on-primary-container": "#dad7ff",
+                    "on-secondary-container": "#454386",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-container-highest": "#e1e3e4",
+                    "outline-variant": "#c7c4d8",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#c3c0ff",
+                    "secondary-fixed-dim": "#c3c0ff",
+                    "surface": "#f8f9fa",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary": "#58579b",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "inverse-surface": "#2e3132",
+                    "tertiary": "#7e3000",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#4f46e5",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-surface": "#191c1d",
+                    "on-surface-variant": "#464555",
+                    "on-primary-fixed": "#0f0069",
+                    "on-background": "#191c1d",
+                    "surface-variant": "#e1e3e4",
+                    "surface-tint": "#4d44e3",
+                    "on-tertiary-container": "#ffd2be",
+                    "secondary-container": "#b6b4ff",
+                    "background": "#f8f9fa",
+                    "on-error-container": "#93000a",
+                    "primary": "#3525cd",
+                    "outline": "#777587"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#f8f9fa] dark:bg-slate-900 docked full-width top-0 z-50 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors p-2 rounded-full active:scale-95 active:duration-150">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-2xl font-black text-[#3525cd] dark:text-[#4f46e5] tracking-tighter font-['Inter']">Lingoo</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high ring-2 ring-primary/10">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a friendly professional person with soft studio lighting and a clean neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG54Fn1ZuVxG97dHKSU-CqZ5AUJIDh8az-EG5WC2T0fQ6FpLERqATA5J6lWIdY9HlpN0o2hGZgaLn1sZuuYEIFcz0J4Bj-SEBZ0t5EgwxPxd7BD-h8xlGBbSWbA2bSTtY9O1mIu_rx6hlcp5aV1PRVpnpz2vgPZfNFUN6LcXlmbHl3HC2Tcwny1F6-4z5qot-a6IrG9ToDBFRzhBnxq5dd1Iw3RERuopfW1-bRFWMR8JZC3pEsfhI7cY7xAIWc924wNy62vgzRoQfG"/>
+</div>
+</div>
+</header>
+<main class="max-w-xl mx-auto px-6 mt-8">
+<!-- Search Bar Section -->
+<div class="relative group transition-all duration-500 mb-10">
+<div class="flex items-center bg-surface-container-high rounded-xl p-1.5 focus-within:bg-surface-container-lowest focus-within:shadow-[0_20px_50px_-20px_rgba(53,37,205,0.15)] transition-all duration-300">
+<div class="pl-5 pr-3 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<input class="w-full bg-transparent border-none focus:ring-0 text-lg font-medium placeholder:text-on-surface-variant/50 py-3" placeholder="Search for a word..." type="text"/>
+<button class="bg-primary text-white px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                    Search
+                </button>
+</div>
+</div>
+<!-- Trilingual Segmented Control -->
+<div class="bg-surface-container-high p-1.5 rounded-lg flex items-center mb-12 relative">
+<button class="flex-1 py-2.5 text-sm font-semibold text-primary bg-surface-container-lowest rounded-sm shadow-sm transition-all z-10">
+                English
+            </button>
+<button class="flex-1 py-2.5 text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all z-10">
+                Hindi
+            </button>
+<button class="flex-1 py-2.5 text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-all z-10">
+                Spanish
+            </button>
+</div>
+<!-- Word Card Content Area -->
+<article class="space-y-12">
+<!-- Header Section -->
+<div class="flex justify-between items-end">
+<div class="space-y-2">
+<span class="text-xs font-bold tracking-[0.2em] uppercase text-primary/60">English Vocabulary</span>
+<h2 class="text-6xl font-black text-on-surface tracking-tighter leading-none">Journey</h2>
+<div class="flex items-center gap-3 pt-2 text-on-surface-variant">
+<span class="text-lg font-medium italic">/ˈdʒɜːni/</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-primary-fixed transition-colors text-primary active:scale-90">
+<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Definition Block -->
+<div class="space-y-4">
+<div class="inline-block px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded text-[11px] font-bold uppercase tracking-widest">Noun</div>
+<p class="text-2xl leading-relaxed text-on-surface font-light">
+                    An act of travelling from one place to another, especially when they are far apart.
+                </p>
+</div>
+<!-- Relationship Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+<!-- Synonyms -->
+<div class="space-y-6">
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                        Synonyms
+                    </h3>
+<div class="flex flex-wrap gap-3">
+<span class="px-5 py-2.5 bg-green-50 text-green-700 rounded-full text-sm font-medium hover:bg-green-100 transition-colors">trip</span>
+<span class="px-5 py-2.5 bg-green-50 text-green-700 rounded-full text-sm font-medium hover:bg-green-100 transition-colors">expedition</span>
+<span class="px-5 py-2.5 bg-green-50 text-green-700 rounded-full text-sm font-medium hover:bg-green-100 transition-colors">voyage</span>
+<span class="px-5 py-2.5 bg-green-50 text-green-700 rounded-full text-sm font-medium hover:bg-green-100 transition-colors">trek</span>
+</div>
+</div>
+<!-- Antonyms -->
+<div class="space-y-6">
+<h3 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        Antonyms
+                    </h3>
+<div class="flex flex-wrap gap-3">
+<span class="px-5 py-2.5 bg-red-50 text-red-700 rounded-full text-sm font-medium hover:bg-red-100 transition-colors">stagnation</span>
+<span class="px-5 py-2.5 bg-red-50 text-red-700 rounded-full text-sm font-medium hover:bg-red-100 transition-colors">stay</span>
+<span class="px-5 py-2.5 bg-red-50 text-red-700 rounded-full text-sm font-medium hover:bg-red-100 transition-colors">halt</span>
+</div>
+</div>
+</div>
+<!-- Contextual Visual Card -->
+<div class="mt-8 rounded-lg overflow-hidden relative aspect-[16/9] group">
+<img alt="Scenic mountain journey" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A winding road leading through majestic snow-capped mountains under a clear blue sky, evoking a sense of adventure and travel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCS-iZx1F3Ooopj6GsUVqxJF6eTtfZgOoTCrdDSp6oFqWQ7gwalMjXLSvi1fyEqDud6hOVYdUSx9i5DRsWcNXy0ax4C_NzRJhqxSkLlE7lnVmS8JzCegXDo5-lERuamoNM8m-ZGa6ebQcK1E6dt7BM8u_apU4GTh_a5Ojaqsf209aDE9tEcco3IY_IhLVu--IyeMB2QWGRHlPSBLYbk-ZLjgD6u2I4eXtuQKE9EWMUP73Z_RlCTKWLLfBhvqIPp12Pf82lz87T0p-o"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+<p class="text-white text-lg font-medium italic">"The journey of a thousand miles begins with one step."</p>
+</div>
+</div>
+</article>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-[#f8f9fa]/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 rounded-t-[2rem] shadow-[0_-10px_40px_-10px_rgba(53,37,205,0.08)]">
+<a class="flex flex-col items-center justify-center bg-[#f3f4f5] dark:bg-slate-800 text-[#3525cd] dark:text-[#4f46e5] rounded-full p-3 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-3 hover:text-[#3525cd] dark:hover:text-[#4f46e5] transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-3 hover:text-[#3525cd] dark:hover:text-[#4f46e5] transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-3 hover:text-[#3525cd] dark:hover:text-[#4f46e5] transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Account</span>
+</a>
+</nav>
+</body></html>
