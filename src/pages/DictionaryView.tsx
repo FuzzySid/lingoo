@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { Search, Volume2, Info, Loader2, BookOpen, Sparkles } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Search, Volume2, Info, Loader2, BookOpen, Sparkles, Bookmark, RefreshCw } from 'lucide-react'
 import LanguageTabs from '../components/LanguageTabs'
 import { useDictionary } from '../hooks/useDictionary'
-import type { DictionaryEntry, HindiEntry, SpanishEntry } from '../services/dictionaryService'
+import type { DictionaryEntry, HindiEntry, SpanishEntry, TrilingualEntry } from '../services/dictionaryService'
+import type { SavedItem } from '../types/dictionary'
 
 type Language = 'en' | 'hi' | 'es'
 
@@ -15,16 +16,106 @@ function playAudio(word: string, lang = 'en-US') {
   window.speechSynthesis.speak(utterance)
 }
 
-export default function DictionaryView() {
+interface DictionaryViewProps {
+  onWordSearched: (query: string) => void
+  pendingSearch: string | null
+  onPendingSearchConsumed: () => void
+  savedItems: SavedItem[]
+  onToggleSave: (query: string, lang: Language, data: TrilingualEntry) => void
+  onRefreshSave: (query: string, newData: TrilingualEntry) => void
+  pendingLoad: { query: string; data: TrilingualEntry } | null
+  onPendingLoadConsumed: () => void
+}
+
+export default function DictionaryView({
+  onWordSearched,
+  pendingSearch,
+  onPendingSearchConsumed,
+  savedItems,
+  onToggleSave,
+  onRefreshSave,
+  pendingLoad,
+  onPendingLoadConsumed,
+}: DictionaryViewProps) {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en')
   const [query, setQuery] = useState('')
   const [hasSearched, setHasSearched] = useState(false)
-  const { data, loading, error, lookup } = useDictionary()
+  const [cachedData, setCachedData] = useState<TrilingualEntry | null>(null)
+  const [isLoadedFromCache, setIsLoadedFromCache] = useState(false)
+  const { data: apiData, loading, error, lookup } = useDictionary()
+  const prevQueryRef = useRef<string>('')
+
+  const data = isLoadedFromCache ? cachedData : apiData
+  const currentIsSaved = savedItems.some(
+    s => s.query.toLowerCase() === prevQueryRef.current.toLowerCase()
+  )
+
+  // Notify parent + refresh saved data after successful API response
+  useEffect(() => {
+    if (apiData && !loading && !error) {
+      onWordSearched(prevQueryRef.current)
+      if (savedItems.some(s => s.query.toLowerCase() === prevQueryRef.current.toLowerCase())) {
+        onRefreshSave(prevQueryRef.current, apiData)
+      }
+    }
+  }, [apiData]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Handle Quick Search replay from HistoryView — cache-first
+  useEffect(() => {
+    if (pendingSearch) {
+      setQuery(pendingSearch)
+      prevQueryRef.current = pendingSearch
+      const match = savedItems.find(s => s.query.toLowerCase() === pendingSearch.toLowerCase())
+      if (match) {
+        setHasSearched(true)
+        setCachedData(match.fullData)
+        setIsLoadedFromCache(true)
+        onWordSearched(pendingSearch)
+      } else {
+        setIsLoadedFromCache(false)
+        setCachedData(null)
+        setHasSearched(true)
+        lookup(pendingSearch)
+      }
+      onPendingSearchConsumed()
+    }
+  }, [pendingSearch]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Handle loading a saved word from SavedView "View Details"
+  useEffect(() => {
+    if (pendingLoad) {
+      setQuery(pendingLoad.query)
+      setHasSearched(true)
+      setCachedData(pendingLoad.data)
+      setIsLoadedFromCache(true)
+      prevQueryRef.current = pendingLoad.query
+      onWordSearched(pendingLoad.query)
+      onPendingLoadConsumed()
+    }
+  }, [pendingLoad]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const trimmed = query.trim()
+    prevQueryRef.current = trimmed
+    const match = savedItems.find(s => s.query.toLowerCase() === trimmed.toLowerCase())
+    if (match) {
+      setHasSearched(true)
+      setCachedData(match.fullData)
+      setIsLoadedFromCache(true)
+      onWordSearched(trimmed)
+      return
+    }
+    setIsLoadedFromCache(false)
+    setCachedData(null)
     setHasSearched(true)
-    lookup(query)
+    lookup(trimmed)
+  }
+
+  function handleRefresh() {
+    setIsLoadedFromCache(false)
+    setCachedData(null)
+    lookup(prevQueryRef.current)
   }
 
   return (
@@ -77,6 +168,36 @@ export default function DictionaryView() {
           {/* Language Tabs + Word Cards */}
           {!loading && !error && data && (
             <>
+              {/* Bookmark bar — above language tabs */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  {isLoadedFromCache && (
+                    <>
+                      <span className="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded-full tracking-widest">
+                        Saved Word
+                      </span>
+                      <button
+                        onClick={handleRefresh}
+                        title="Refresh data from API"
+                        className="text-on-surface-variant hover:text-primary transition-colors active:scale-90"
+                      >
+                        <RefreshCw size={14} />
+                      </button>
+                    </>
+                  )}
+                </div>
+                <button
+                  onClick={() => onToggleSave(prevQueryRef.current, currentLanguage, data)}
+                  title={currentIsSaved ? 'Remove from Saved' : 'Save this word'}
+                  className="text-primary transition-all active:scale-90 hover:scale-110"
+                >
+                  {currentIsSaved
+                    ? <Bookmark size={22} fill="currentColor" />
+                    : <Bookmark size={22} />
+                  }
+                </button>
+              </div>
+
               <div className="mb-12">
                 <LanguageTabs current={currentLanguage} onChange={setCurrentLanguage} />
               </div>
@@ -309,7 +430,7 @@ function SpanishContent({ data }: { data: SpanishEntry }) {
             </span>
           </div>
         </div>
-        <button onClick={() => playAudio(data.word, 'es-ES')} className="p-5 bg-primary-container text-on-primary-container rounded-full hover:scale-105 active:scale-95 transition-all shadow-[0_10px_30px_-10px_rgba(79,70,229,0.3)]">
+        <button onClick={() => playAudio(data.word, 'es-ES')} className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-[0_20px_40px_-10px_rgba(53,37,205,0.3)] active:scale-95 transition-transform">
           <Volume2 size={22} />
         </button>
       </header>

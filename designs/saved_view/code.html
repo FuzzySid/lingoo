@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Saved Words - Lingoo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#e2dfff",
+                      "on-tertiary-container": "#ffd2be",
+                      "surface-bright": "#f8f9fa",
+                      "inverse-on-surface": "#f0f1f2",
+                      "tertiary-container": "#a44100",
+                      "primary": "#3525cd",
+                      "on-primary-container": "#dad7ff",
+                      "secondary-container": "#b6b4ff",
+                      "on-surface": "#191c1d",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "surface-container": "#edeeef",
+                      "on-background": "#191c1d",
+                      "outline-variant": "#c7c4d8",
+                      "surface-dim": "#d9dadb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#140f54",
+                      "secondary-fixed-dim": "#c3c0ff",
+                      "surface": "#f8f9fa",
+                      "secondary": "#58579b",
+                      "on-secondary-fixed-variant": "#413f82",
+                      "surface-tint": "#4d44e3",
+                      "surface-variant": "#e1e3e4",
+                      "primary-container": "#4f46e5",
+                      "tertiary-fixed-dim": "#ffb695",
+                      "tertiary-fixed": "#ffdbcc",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#e2dfff",
+                      "inverse-surface": "#2e3132",
+                      "background": "#f8f9fa",
+                      "on-secondary-container": "#454386",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-container-high": "#e7e8e9",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed-variant": "#7b2f00",
+                      "outline": "#777587",
+                      "on-primary-fixed": "#0f0069",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#351000",
+                      "tertiary": "#7e3000",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#c3c0ff",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-surface-variant": "#464555",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Inter"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 w-full bg-[#f8f9fa] dark:bg-[#191c1d] transition-colors duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#3525cd] dark:text-[#4f46e5] cursor-pointer">menu</span>
+<h1 class="text-2xl font-black text-[#3525cd] dark:text-[#4f46e5] font-['Inter'] tracking-tight">Lingoo</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#464555] dark:text-gray-400 cursor-pointer hover:bg-indigo-50 dark:hover:bg-indigo-900/20 p-2 rounded-full transition-all">search</span>
+<span class="material-symbols-outlined text-[#3525cd] dark:text-[#4f46e5] cursor-pointer">account_circle</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="text-4xl font-black text-on-surface tracking-tight leading-none mb-2">Saved Words</h2>
+<p class="text-on-surface-variant text-sm font-medium">32 items curated in your library</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="text-label-md font-semibold tracking-wide">Sort</span>
+<span class="material-symbols-outlined text-lg">swap_vert</span>
+</button>
+</div>
+<!-- Flashcard List -->
+<div class="space-y-6">
+<!-- Card 1: Spanish -->
+<div class="group relative bg-surface-container-lowest p-6 rounded-lg transition-all duration-300 hover:shadow-[0_20px_50px_-20px_rgba(53,37,205,0.12)]">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded-full tracking-widest">ES</span>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined filled-icon text-primary cursor-pointer" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">arrow_forward</span>
+</div>
+</div>
+<h3 class="text-4xl font-black text-on-surface mb-2 tracking-tight">Viaje</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">A long journey or trip, especially one involving travel by sea or in space.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<span class="text-xs font-medium text-outline uppercase tracking-widest">Saved 2 days ago</span>
+<button class="text-primary font-bold text-sm hover:underline underline-offset-4">View Details</button>
+</div>
+</div>
+<!-- Card 2: Hindi -->
+<div class="group relative bg-surface-container-low p-6 rounded-lg transition-all duration-300 hover:bg-surface-container-lowest hover:shadow-[0_20px_50px_-20px_rgba(53,37,205,0.12)]">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold rounded-full tracking-widest">HI</span>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined filled-icon text-primary cursor-pointer" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">arrow_forward</span>
+</div>
+</div>
+<h3 class="text-4xl font-black text-on-surface mb-2 tracking-tight">यात्रा</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">The act of traveling from one place to another; a voyage or expedition.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<span class="text-xs font-medium text-outline uppercase tracking-widest">Saved 5 days ago</span>
+<button class="text-primary font-bold text-sm hover:underline underline-offset-4">View Details</button>
+</div>
+</div>
+<!-- Card 3: English -->
+<div class="group relative bg-surface-container-lowest p-6 rounded-lg transition-all duration-300 hover:shadow-[0_20px_50px_-20px_rgba(53,37,205,0.12)]">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold rounded-full tracking-widest">EN</span>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined filled-icon text-primary cursor-pointer" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">arrow_forward</span>
+</div>
+</div>
+<h3 class="text-4xl font-black text-on-surface mb-2 tracking-tight">Journey</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">An act of traveling from one place to another, often over a long distance.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<span class="text-xs font-medium text-outline uppercase tracking-widest">Saved 1 week ago</span>
+<button class="text-primary font-bold text-sm hover:underline underline-offset-4">View Details</button>
+</div>
+</div>
+<!-- Card 4: French -->
+<div class="group relative bg-surface-container-low p-6 rounded-lg transition-all duration-300 hover:bg-surface-container-lowest hover:shadow-[0_20px_50px_-20px_rgba(53,37,205,0.12)]">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded-full tracking-widest">FR</span>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined filled-icon text-primary cursor-pointer" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">arrow_forward</span>
+</div>
+</div>
+<h3 class="text-4xl font-black text-on-surface mb-2 tracking-tight">Lumière</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">The natural agent that stimulates sight and makes things visible.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<span class="text-xs font-medium text-outline uppercase tracking-widest">Saved 2 weeks ago</span>
+<button class="text-primary font-bold text-sm hover:underline underline-offset-4">View Details</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[3rem] bg-[#f8f9fa]/80 dark:bg-[#191c1d]/80 backdrop-blur-xl flex justify-around items-center h-20 pb-safe px-4 shadow-[0_-10px_40px_-10px_rgba(53,37,205,0.08)]">
+<a class="flex flex-col items-center justify-center text-[#464555] dark:text-gray-400 px-5 py-2 hover:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">search</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide uppercase">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#3525cd] text-white rounded-full px-6 py-2 transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide uppercase">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#464555] dark:text-gray-400 px-5 py-2 hover:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-wide uppercase">History</span>
+</a>
+</nav>
+</body></html>
