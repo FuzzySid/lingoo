@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
-import { Search, Volume2, Info, Loader2, BookOpen, Sparkles, Bookmark, RefreshCw } from 'lucide-react'
+import { Search, Volume2, Info, Loader2, BookOpen, Sparkles, Bookmark, RefreshCw, Clock, ArrowRight } from 'lucide-react'
 import LanguageTabs from '../components/LanguageTabs'
 import { useDictionary } from '../hooks/useDictionary'
 import type { DictionaryEntry, HindiEntry, SpanishEntry, TrilingualEntry } from '../services/dictionaryService'
-import type { SavedItem } from '../types/dictionary'
+import type { SavedItem, HistoryItem } from '../types/dictionary'
 
 type Language = 'en' | 'hi' | 'es'
 
@@ -25,6 +25,7 @@ interface DictionaryViewProps {
   onRefreshSave: (query: string, newData: TrilingualEntry) => void
   pendingLoad: { query: string; data: TrilingualEntry } | null
   onPendingLoadConsumed: () => void
+  history: HistoryItem[]
 }
 
 export default function DictionaryView({
@@ -36,6 +37,7 @@ export default function DictionaryView({
   onRefreshSave,
   pendingLoad,
   onPendingLoadConsumed,
+  history,
 }: DictionaryViewProps) {
   const [currentLanguage, setCurrentLanguage] = useState<Language>('en')
   const [query, setQuery] = useState('')
@@ -60,23 +62,28 @@ export default function DictionaryView({
     }
   }, [apiData]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  function triggerSearch(word: string) {
+    const trimmed = word.trim()
+    setQuery(trimmed)
+    prevQueryRef.current = trimmed
+    const match = savedItems.find(s => s.query.toLowerCase() === trimmed.toLowerCase())
+    if (match) {
+      setHasSearched(true)
+      setCachedData(match.fullData)
+      setIsLoadedFromCache(true)
+      onWordSearched(trimmed)
+    } else {
+      setIsLoadedFromCache(false)
+      setCachedData(null)
+      setHasSearched(true)
+      lookup(trimmed)
+    }
+  }
+
   // Handle Quick Search replay from HistoryView — cache-first
   useEffect(() => {
     if (pendingSearch) {
-      setQuery(pendingSearch)
-      prevQueryRef.current = pendingSearch
-      const match = savedItems.find(s => s.query.toLowerCase() === pendingSearch.toLowerCase())
-      if (match) {
-        setHasSearched(true)
-        setCachedData(match.fullData)
-        setIsLoadedFromCache(true)
-        onWordSearched(pendingSearch)
-      } else {
-        setIsLoadedFromCache(false)
-        setCachedData(null)
-        setHasSearched(true)
-        lookup(pendingSearch)
-      }
+      triggerSearch(pendingSearch)
       onPendingSearchConsumed()
     }
   }, [pendingSearch]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -96,20 +103,7 @@ export default function DictionaryView({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const trimmed = query.trim()
-    prevQueryRef.current = trimmed
-    const match = savedItems.find(s => s.query.toLowerCase() === trimmed.toLowerCase())
-    if (match) {
-      setHasSearched(true)
-      setCachedData(match.fullData)
-      setIsLoadedFromCache(true)
-      onWordSearched(trimmed)
-      return
-    }
-    setIsLoadedFromCache(false)
-    setCachedData(null)
-    setHasSearched(true)
-    lookup(trimmed)
+    triggerSearch(query)
   }
 
   function handleRefresh() {
@@ -145,7 +139,7 @@ export default function DictionaryView({
       </form>
 
       {/* Empty State */}
-      {!hasSearched && <EmptyState />}
+      {!hasSearched && <EmptyState history={history} onSearch={triggerSearch} />}
 
       {/* Post-search content */}
       {hasSearched && (
@@ -214,7 +208,61 @@ export default function DictionaryView({
 
 /* ── Empty State ───────────────────────────────────────────── */
 
-function EmptyState() {
+function EmptyState({ history, onSearch }: { history: HistoryItem[]; onSearch: (word: string) => void }) {
+  if (history.length >= 3) {
+    const recent = history.slice(0, 3)
+    return (
+      <div className="flex flex-col gap-6 pt-2">
+        <div className="flex items-center justify-between">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-on-surface-variant/60">
+            Continue your journey
+          </h2>
+        </div>
+
+        <div className="space-y-3">
+          {recent.map(item => (
+            <button
+              key={item.id}
+              onClick={() => onSearch(item.query)}
+              className="w-full bg-surface-container-lowest rounded-xl p-4 flex items-center justify-between shadow-[0_4px_20px_-8px_rgba(0,0,0,0.06)] border border-outline-variant/10 hover:shadow-[0_12px_32px_-10px_rgba(53,37,205,0.12)] hover:border-primary/20 transition-all duration-300 group text-left"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-lg bg-primary/8 flex items-center justify-center shrink-0">
+                  <Clock size={16} className="text-primary/60" />
+                </div>
+                <div>
+                  <p className="font-black text-on-surface text-lg tracking-tight leading-tight">
+                    {item.query}
+                  </p>
+                  <p className="text-xs font-medium text-on-surface-variant/60 mt-0.5">
+                    {formatRelativeTime(item.timestamp)}
+                  </p>
+                </div>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-primary-container/60 flex items-center justify-center group-hover:bg-primary transition-colors shrink-0">
+                <ArrowRight size={18} className="text-primary group-hover:text-white transition-colors" />
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {/* Did You Know card */}
+        <div className="w-full bg-primary/5 rounded-2xl p-6 text-left mt-2">
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles size={16} className="text-primary" />
+            <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-primary">
+              Did you know?
+            </span>
+          </div>
+          <p className="text-on-surface text-sm leading-relaxed">
+            Spanish and Hindi share many grammatical genders. Look at the{' '}
+            <span className="font-bold text-primary">"Hindi Nuance"</span> tab to see the connection!
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center text-center gap-10 pt-4">
       {/* Illustration */}
@@ -258,6 +306,16 @@ function EmptyState() {
       </div>
     </div>
   )
+}
+
+function formatRelativeTime(timestamp: number): string {
+  const diffMins = Math.floor((Date.now() - timestamp) / 60000)
+  if (diffMins < 1) return 'Just now'
+  if (diffMins < 60) return `${diffMins} min ago`
+  const diffHours = Math.floor(diffMins / 60)
+  if (diffHours < 24) return `${diffHours}h ago`
+  const diffDays = Math.floor(diffHours / 24)
+  return `${diffDays}d ago`
 }
 
 /* ── English ───────────────────────────────────────────────── */

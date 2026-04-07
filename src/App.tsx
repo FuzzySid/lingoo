@@ -39,6 +39,7 @@ function App() {
           onRefreshSave={refreshSavedData}
           pendingLoad={pendingLoad}
           onPendingLoadConsumed={() => setPendingLoad(null)}
+          history={history}
         />
       )}
       {currentPage === 'history' && (
