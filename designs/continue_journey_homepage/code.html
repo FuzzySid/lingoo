@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lexicographer - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-fixed-variant": "#413f82",
+                        "tertiary": "#7e3000",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "on-surface": "#191c1d",
+                        "on-background": "#191c1d",
+                        "inverse-primary": "#c3c0ff",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "secondary-container": "#b6b4ff",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary": "#58579b",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "on-tertiary-fixed": "#351000",
+                        "outline-variant": "#c7c4d8",
+                        "primary-fixed": "#e2dfff",
+                        "secondary-fixed": "#e2dfff",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-secondary-container": "#454386",
+                        "surface-tint": "#4d44e3",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary-container": "#a44100",
+                        "surface-dim": "#d9dadb",
+                        "primary-container": "#4f46e5",
+                        "surface-bright": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-error": "#ffffff",
+                        "outline": "#777587",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary-container": "#ffd2be",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-container": "#edeeef",
+                        "surface-variant": "#e1e3e4",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-fixed": "#140f54",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#f8f9fa] dark:bg-slate-950 flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#3525cd] dark:text-[#4f46e5]" data-icon="menu_book">menu_book</span>
+<h1 class="text-xl font-black text-[#3525cd] dark:text-[#4f46e5] tracking-tighter">Lexicographer</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="User" class="w-full h-full object-cover" data-alt="close-up portrait of a diverse person smiling softly with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4RWRd8KAM0AxTvK8iovUEAvcx6rb4UdqruC67x_T5WegOzJvOh0mj0wehdAJimMNZFTgbZD9jsTdj7SZA5Fz4sIiHY8IQGj-2caoLi7caTqNlhKDRxk5X3jntAVIBvc8-P4dYfgrZ26fyzvpmiDt614R-fxn1aDPxrBhQb9UujrxStE4rbv1qvjgxLAOhUM3u_iiwTHpXs2_DylEmCY7y_sW36HRPzafTeVPt0-_oYyA57N0mCfEQPF9N7Uqhblyb0YZ_nwPIRKZB"/>
+</div>
+</header>
+<main class="pt-24 px-6 space-y-8">
+<!-- Hero Section & Search Bar -->
+<section class="space-y-6">
+<div class="space-y-1">
+<p class="text-sm font-medium tracking-[0.1em] text-on-surface-variant uppercase">Good morning,</p>
+<h2 class="text-4xl font-black tracking-tighter text-primary">Explore</h2>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary" data-icon="search">search</span>
+</div>
+<input class="w-full h-[60px] pl-16 pr-6 bg-surface-container-lowest text-on-surface rounded-xl focus:ring-2 focus:ring-primary/20 border-none shadow-[0_10px_30px_-10px_rgba(53,37,205,0.08)] transition-all placeholder:text-outline/60" placeholder="Search a word..." type="text"/>
+</div>
+</section>
+<!-- Word of the Day -->
+<section class="relative h-[240px] rounded-lg overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
+<img alt="Library" class="absolute inset-0 w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" data-alt="atmospheric view of an old library with high shelves filled with leather-bound books and soft golden sunlight streaming through tall windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVF8z8pFwHx_ReaIx490NYSDtqRGQz5CaWyFormlKu78xxF-FUGvU_6-pXUurJScHwXwsOfvKleHvG2vZ4AnZgC_FRJ_dYoGrTstHsEjXslKWV_JpDliPxMGxAet-OHxYU4lPtoKDJxVkNfebKTEbzH_Txickktw2fsXUNv1i_iAFDL4TQ9ZDBazfL_BPxa_2-rxuB4DyY9cNyqQyyRGSdQgTOkINWkdmEV8YrzsAIYYST8dBJnc0zdUUpXwfmDbLU-eIW2dBBp96v"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 space-y-2">
+<span class="inline-block px-3 py-1 bg-primary text-white text-[10px] font-bold tracking-widest uppercase rounded-full">Word of the day</span>
+<h3 class="text-3xl font-extrabold text-white tracking-tighter">Serendipity</h3>
+<p class="text-white/80 text-sm italic font-medium leading-relaxed">The occurrence of events by chance in a happy or beneficial way.</p>
+</div>
+</section>
+<!-- Continue Your Journey -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<h4 class="text-lg font-bold tracking-tight">Continue your journey</h4>
+<button class="text-xs font-bold text-primary tracking-wide uppercase hover:opacity-80">View History</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Card 1 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-lg transition-all hover:bg-surface-container">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center bg-primary-fixed text-on-primary-fixed rounded-sm font-black text-xs">ES</div>
+<div class="space-y-0.5">
+<span class="text-base font-extrabold block">Viaje</span>
+<span class="text-xs text-on-surface-variant font-medium">A journey or trip...</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Card 2 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-lg transition-all hover:bg-surface-container">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center bg-tertiary-fixed text-on-tertiary-fixed rounded-sm font-black text-xs">FR</div>
+<div class="space-y-0.5">
+<span class="text-base font-extrabold block">Éphémère</span>
+<span class="text-xs text-on-surface-variant font-medium">Lasting for a short time...</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Card 3 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-lg transition-all hover:bg-surface-container">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center bg-secondary-fixed text-on-secondary-fixed rounded-sm font-black text-xs">EN</div>
+<div class="space-y-0.5">
+<span class="text-base font-extrabold block">Luminous</span>
+<span class="text-xs text-on-surface-variant font-medium">Shedding light; bright...</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Promotional Card -->
+<section class="p-8 bg-primary rounded-lg shadow-[0_20px_50px_-20px_rgba(53,37,205,0.4)] relative overflow-hidden">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 space-y-4">
+<h4 class="text-2xl font-black text-white tracking-tighter leading-none">Build your<br/>Lexicon</h4>
+<p class="text-on-primary-container text-sm leading-relaxed max-w-[200px]">Unlock personalized flashcards and trilingual voice notes for every word.</p>
+<button class="bg-white text-primary px-6 py-3 rounded-full text-xs font-black tracking-widest uppercase shadow-xl hover:scale-95 transition-transform">Get Started</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-[#f8f9fa]/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-around items-center px-4 pb-6 pt-2 rounded-t-xl shadow-[0_-10px_40px_-10px_rgba(53,37,205,0.08)]">
+<!-- Search Active -->
+<a class="flex flex-col items-center justify-center bg-[#3525cd] text-white rounded-full p-3 transition-transform duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</a>
+<!-- History Inactive -->
+<a class="flex flex-col items-center justify-center text-[#464555] dark:text-slate-500 p-3 hover:text-[#3525cd] dark:hover:text-[#4f46e5]" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">History</span>
+</a>
+<!-- Saved Inactive -->
+<a class="flex flex-col items-center justify-center text-[#464555] dark:text-slate-500 p-3 hover:text-[#3525cd] dark:hover:text-[#4f46e5]" href="#">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Saved</span>
+</a>
+<!-- Account Inactive -->
+<a class="flex flex-col items-center justify-center text-[#464555] dark:text-slate-500 p-3 hover:text-[#3525cd] dark:hover:text-[#4f46e5]" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide uppercase mt-1">Account</span>
+</a>
+</nav>
+</body></html>
