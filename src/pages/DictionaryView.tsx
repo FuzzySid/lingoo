@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Search, Volume2, Info, Loader2, BookOpen, Sparkles, Bookmark, RefreshCw, Clock, ArrowRight } from 'lucide-react'
+import { Search, Volume2, Info, Loader2, BookOpen, Sparkles, Bookmark, RefreshCw, Clock, ArrowRight, X } from 'lucide-react'
 import LanguageTabs from '../components/LanguageTabs'
 import { useDictionary } from '../hooks/useDictionary'
 import type { DictionaryEntry, HindiEntry, SpanishEntry, TrilingualEntry } from '../services/dictionaryService'
@@ -129,6 +129,16 @@ export default function DictionaryView({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+        {query && (
+          <button
+            type="button"
+            onClick={() => setQuery('')}
+            aria-label="Clear search query"
+            className="mx-2 flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-on-surface/6 hover:text-on-surface active:scale-95"
+          >
+            <X size={16} />
+          </button>
+        )}
         <button
           type="submit"
           disabled={loading || !query.trim()}
