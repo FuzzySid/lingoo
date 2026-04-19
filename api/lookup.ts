@@ -80,16 +80,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Missing or invalid "word" in request body.' })
   }
 
-  const apiKey = process.env.OPENAI_API_KEY
-  if (!apiKey) {
-    return res.status(500).json({ error: 'Server misconfiguration: OPENAI_API_KEY is not set.' })
+  const portkeyApiKey = process.env.PORTKEY_API_KEY
+  const portkeyVirtualKey = process.env.PORTKEY_VIRTUAL_KEY
+  if (!portkeyApiKey || !portkeyVirtualKey) {
+    return res.status(500).json({ error: 'Server misconfiguration: PORTKEY_API_KEY or PORTKEY_VIRTUAL_KEY is not set.' })
   }
 
-  const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+  const portkeyRes = await fetch('https://api.portkey.ai/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
+      'x-portkey-api-key': portkeyApiKey,
+      'x-portkey-virtual-key': portkeyVirtualKey,
+      'x-portkey-metadata': JSON.stringify({ search_word: word, project: 'Lingoo' }),
     },
     body: JSON.stringify({
       model: 'gpt-4o-mini',
@@ -102,20 +105,33 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }),
   })
 
-  if (!openaiRes.ok) {
-    const err = await openaiRes.json().catch(() => ({}))
-    return res.status(openaiRes.status).json({
-      error: (err as any)?.error?.message ?? `OpenAI API error: ${openaiRes.status}`,
+  if (!portkeyRes.ok) {
+    const err = await portkeyRes.json().catch(() => ({}))
+    return res.status(portkeyRes.status).json({
+      error: (err as any)?.error?.message ?? `Portkey API error: ${portkeyRes.status}`,
     })
   }
 
-  const json = await openaiRes.json()
+  const json = await portkeyRes.json()
   const content = json.choices?.[0]?.message?.content
 
   if (!content) {
-    return res.status(502).json({ error: 'Empty response from OpenAI.' })
+    return res.status(502).json({ error: 'Empty response from Portkey.' })
+  }
+
+  const usage = json.usage as { prompt_tokens: number; completion_tokens: number; total_tokens: number }
+  const costUSD = (usage.prompt_tokens / 1_000_000) * 0.15 + (usage.completion_tokens / 1_000_000) * 0.60
+  const costINR = costUSD * 83.5
+  const debug = {
+    tokens: {
+      prompt: usage.prompt_tokens,
+      completion: usage.completion_tokens,
+      total: usage.total_tokens,
+    },
+    costUSD: parseFloat(costUSD.toFixed(6)),
+    costINR: parseFloat(costINR.toFixed(4)),
   }
 
   const entry: TrilingualEntry = JSON.parse(content)
-  return res.status(200).json(entry)
+  return res.status(200).json({ ...entry, debug })
 }

@@ -34,6 +34,12 @@ export interface TrilingualEntry {
   es: SpanishEntry
 }
 
+interface DebugInfo {
+  tokens: { prompt: number; completion: number; total: number }
+  costUSD: number
+  costINR: number
+}
+
 export async function lookupWord(word: string): Promise<TrilingualEntry> {
   const response = await fetch('/api/lookup', {
     method: 'POST',
@@ -46,5 +52,7 @@ export async function lookupWord(word: string): Promise<TrilingualEntry> {
     throw new Error((err as any)?.error ?? `Lookup failed: ${response.status}`)
   }
 
-  return response.json() as Promise<TrilingualEntry>
+  const { debug, ...entry } = await response.json() as TrilingualEntry & { debug: DebugInfo }
+  console.log('[Dictionary Debug]', debug)
+  return entry as TrilingualEntry
 }

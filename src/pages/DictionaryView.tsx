@@ -112,6 +112,14 @@ export default function DictionaryView({
     lookup(prevQueryRef.current)
   }
 
+  function handleClearSearch() {
+    setQuery('')
+    setHasSearched(false)
+    setCachedData(null)
+    setIsLoadedFromCache(false)
+    prevQueryRef.current = ''
+  }
+
   return (
     <div className="max-w-xl mx-auto px-6 mt-8">
       {/* Search Bar — always visible */}
@@ -132,7 +140,7 @@ export default function DictionaryView({
         {query && (
           <button
             type="button"
-            onClick={() => setQuery('')}
+            onClick={handleClearSearch}
             aria-label="Clear search query"
             className="mx-2 flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-on-surface/6 hover:text-on-surface active:scale-95"
           >
